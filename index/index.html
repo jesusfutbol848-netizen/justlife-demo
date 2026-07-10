@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JustLife - Gimnasio</title>
+    <link rel="stylesheet" href="demo.css">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- ==================== LANDING PAGE ==================== -->
+    <section id="landing" class="page active">
+        <div class="landing-bg">
+            <div class="overlay"></div>
+            <div class="landing-content">
+                <div class="logo-container">
+                
+                    <i class="fas fa-dumbbell logo-icon"></i>
+                    <h1 class="logo-text">JUST<span>LIFE</span></h1>
+                    <p class="tagline">Transforma tu cuerpo. Transforma tu vida.</p>
+                </div>
+                <div class="login-options">
+                    <button class="login-btn user-btn" onclick="showPage('user-login')">
+                        <i class="fas fa-user"></i>
+                        <span>Soy Usuario</span>
+                    </button>
+                    <button class="login-btn instructor-btn" onclick="showPage('instructor-login')">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                        <span>Soy Instructor</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== USER LOGIN ==================== -->
+    <section id="user-login" class="page">
+        <div class="login-page">
+            <div class="login-left">
+                <div class="login-brand">
+                    <i class="fas fa-dumbbell"></i>
+                    <h2>JUST<span>LIFE</span></h2>
+                </div>
+                <p class="login-subtitle">Accede a tus rutinas y sigue tu progreso</p>
+            </div>
+            <div class="login-right">
+                <button class="back-btn" onclick="showPage('landing')">
+                    <i class="fas fa-arrow-left"></i>
+                </button>
+                <h3>Iniciar Sesion - Usuario</h3>
+                <form id="user-login-form" onsubmit="handleUserLogin(event)">
+                    <div class="input-group">
+                        <i class="fas fa-envelope"></i>
+                        <input type="email" id="user-email" placeholder="Correo electronico" required>
+                    </div>
+                    <div class="input-group">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="user-password" placeholder="Contrasena" required>
+                    </div>
+                    <button type="submit" class="submit-btn">
+                        <i class="fas fa-sign-in-alt"></i> Ingresar
+                    </button>
+                    <p class="demo-hint">Demo: usuario@justlife.com / 1234</p>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== INSTRUCTOR LOGIN ==================== -->
+    <section id="instructor-login" class="page">
+        <div class="login-page">
+            <div class="login-left">
+                <div class="login-brand">
+                    <i class="fas fa-dumbbell"></i>
+                    <h2>JUST<span>LIFE</span></h2>
+                </div>
+                <p class="login-subtitle">Gestiona usuarios, rutinas y recompensas</p>
+            </div>
+            <div class="login-right">
+                <button class="back-btn" onclick="showPage('landing')">
+                    <i class="fas fa-arrow-left"></i>
+                </button>
+                <h3>Iniciar Sesion - Instructor</h3>
+                <form id="instructor-login-form" onsubmit="handleInstructorLogin(event)">
+                    <div class="input-group">
+                        <i class="fas fa-envelope"></i>
+                        <input type="email" id="instructor-email" placeholder="Correo electronico" required>
+                    </div>
+                    <div class="input-group">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="instructor-password" placeholder="Contrasena" required>
+                    </div>
+                    <button type="submit" class="submit-btn">
+                        <i class="fas fa-sign-in-alt"></i> Ingresar
+                    </button>
+                    <p class="demo-hint">Demo: instructor@justlife.com / 1234</p>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== USER DASHBOARD ==================== -->
+    <section id="user-dashboard" class="page">
+        <nav class="dashboard-nav">
+            <div class="nav-brand">
+                <i class="fas fa-dumbbell"></i> JUST<span>LIFE</span>
+            </div>
+            <div class="nav-user">
+                <span id="user-name-display">Carlos Garcia</span>
+                <button class="logout-btn" onclick="logout()"><i class="fas fa-sign-out-alt"></i></button>
+            </div>
+        </nav>
+        <div class="dashboard-container">
+            <aside class="sidebar">
+                <ul>
+                    <li class="active" onclick="showUserTab('overview')"><i class="fas fa-home"></i> Inicio</li>
+                    <li onclick="showUserTab('routines')"><i class="fas fa-clipboard-list"></i> Mis Rutinas</li>
+                    <li onclick="showUserTab('checkin')"><i class="fas fa-clock"></i> Registro de Tiempo</li>
+                    <li onclick="showUserTab('rewards')"><i class="fas fa-trophy"></i> Recompensas</li>
+                </ul>
+            </aside>
+            <main class="dashboard-main">
+                <!-- Overview Tab -->
+                <div id="user-overview" class="tab-content active">
+                    <h2>Bienvenido de vuelta, <span id="welcome-user-name">Carlos</span>!</h2>
+                    <div class="stats-grid">
+                        <div class="stat-card orange">
+                            <i class="fas fa-fire"></i>
+                            <div>
+                                <h3 id="stat-visits">12</h3>
+                                <p>Visitas este mes</p>
+                            </div>
+                        </div>
+                        <div class="stat-card black">
+                            <i class="fas fa-clock"></i>
+                            <div>
+                                <h3 id="stat-hours">24h</h3>
+                                <p>Tiempo total</p>
+                            </div>
+                        </div>
+                        <div class="stat-card orange">
+                            <i class="fas fa-star"></i>
+                            <div>
+                                <h3 id="stat-points">350</h3>
+                                <p>Puntos</p>
+                            </div>
+                        </div>
+                        <div class="stat-card black">
+                            <i class="fas fa-fire-alt"></i>
+                            <div>
+                                <h3 id="stat-streak">5</h3>
+                                <p>Racha dias</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="overview-section">
+                        <h3><i class="fas fa-calendar-check"></i> Proxima Rutina</h3>
+                        <div class="next-routine-card" id="next-routine-card">
+                            <div class="routine-preview">
+                                <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=400&h=250&fit=crop" alt="Gym">
+                                <div class="routine-info">
+                                    <h4 id="next-routine-name">Push Day - Pecho y Triceps</h4>
+                                    <p id="next-routine-desc">4 ejercicios - ~45 min</p>
+                                    <span class="difficulty-badge" id="next-routine-diff">Intermedio</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Routines Tab -->
+                <div id="user-routines" class="tab-content">
+                    <h2><i class="fas fa-clipboard-list"></i> Mis Rutinas Asignadas</h2>
+                    <div id="user-routines-list" class="routines-grid">
+                        <!-- Filled by JS -->
+                    </div>
+                    <div id="routine-detail" class="routine-detail hidden">
+                        <button class="back-detail-btn" onclick="closeRoutineDetail()"><i class="fas fa-arrow-left"></i> Volver</button>
+                        <h3 id="detail-routine-title"></h3>
+                        <p id="detail-routine-desc"></p>
+                        <div id="detail-exercises" class="exercises-list"></div>
+                        <div id="detail-videos" class="videos-section">
+                            <h4><i class="fas fa-video"></i> Videos de la Rutina</h4>
+                            <div id="detail-videos-grid" class="videos-grid"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Check-in Tab -->
+                <div id="user-checkin" class="tab-content">
+                    <h2><i class="fas fa-clock"></i> Registro de Tiempo</h2>
+                    <div class="checkin-container">
+                        <div class="checkin-card">
+                            <div class="time-display" id="current-time">--:--:--</div>
+                            <p class="checkin-status" id="checkin-status">No has registrado tu entrada hoy</p>
+                            <button class="checkin-btn" id="checkin-btn" onclick="handleCheckIn()">
+                                <i class="fas fa-door-open"></i> Registrar Entrada
+                            </button>
+                            <div class="checkin-history">
+                                <h4>Historial reciente</h4>
+                                <div id="checkin-history-list"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Rewards Tab -->
+                <div id="user-rewards" class="tab-content">
+                    <h2><i class="fas fa-trophy"></i> Mis Recompensas</h2>
+                    <div class="rewards-summary">
+                        <div class="points-display">
+                            <i class="fas fa-coins"></i>
+                            <span id="user-points-display">350</span> puntos
+                        </div>
+                    </div>
+                    <div id="rewards-list" class="rewards-grid">
+                        <!-- Filled by JS -->
+                    </div>
+                </div>
+            </main>
+        </div>
+    </section>
+
+    <!-- ==================== INSTRUCTOR DASHBOARD ==================== -->
+    <section id="instructor-dashboard" class="page">
+        <nav class="dashboard-nav">
+            <div class="nav-brand">
+                <i class="fas fa-dumbbell"></i> JUST<span>LIFE</span>
+            </div>
+            <div class="nav-user">
+                <span id="instructor-name-display">Coach Ana Lopez</span>
+                <button class="logout-btn" onclick="logout()"><i class="fas fa-sign-out-alt"></i></button>
+            </div>
+        </nav>
+        <div class="dashboard-container">
+            <aside class="sidebar">
+                <ul>
+                    <li class="active" onclick="showInstructorTab('overview')"><i class="fas fa-home"></i> Inicio</li>
+                    <li onclick="showInstructorTab('users')"><i class="fas fa-users"></i> Usuarios</li>
+                    <li onclick="showInstructorTab('assign')"><i class="fas fa-clipboard-list"></i> Asignar Rutinas</li>
+                    <li onclick="showInstructorTab('attendance')"><i class="fas fa-chart-bar"></i> Asistencia</li>
+                    <li onclick="showInstructorTab('manage-rewards')"><i class="fas fa-gift"></i> Recompensas</li>
+                </ul>
+            </aside>
+            <main class="dashboard-main">
+                <!-- Instructor Overview -->
+                <div id="instructor-overview" class="tab-content active">
+                    <h2>Panel del Instructor</h2>
+                    <div class="stats-grid">
+                        <div class="stat-card orange">
+                            <i class="fas fa-users"></i>
+                            <div>
+                                <h3 id="inst-stat-users">8</h3>
+                                <p>Usuarios activos</p>
+                            </div>
+                        </div>
+                        <div class="stat-card black">
+                            <i class="fas fa-clipboard-check"></i>
+                            <div>
+                                <h3 id="inst-stat-routines">15</h3>
+                                <p>Rutinas asignadas</p>
+                            </div>
+                        </div>
+                        <div class="stat-card orange">
+                            <i class="fas fa-calendar-day"></i>
+                            <div>
+                                <h3 id="inst-stat-today">5</h3>
+                                <p>Hoy en el gym</p>
+                            </div>
+                        </div>
+                        <div class="stat-card black">
+                            <i class="fas fa-trophy"></i>
+                            <div>
+                                <h3 id="inst-stat-rewards">12</h3>
+                                <p>Recompensas dadas</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="overview-section">
+                        <h3><i class="fas fa-user-plus"></i> Acceso Rapido</h3>
+                        <div class="quick-actions">
+                            <button class="quick-action-btn" onclick="showInstructorTab('users')">
+                                <i class="fas fa-user-plus"></i> Agregar Usuario
+                            </button>
+                            <button class="quick-action-btn" onclick="showInstructorTab('assign')">
+                                <i class="fas fa-clipboard-list"></i> Asignar Rutina
+                            </button>
+                            <button class="quick-action-btn" onclick="showInstructorTab('attendance')">
+                                <i class="fas fa-chart-bar"></i> Ver Asistencia
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Manage Users Tab -->
+                <div id="instructor-users" class="tab-content">
+                    <h2><i class="fas fa-users"></i> Gestionar Usuarios</h2>
+                    <div class="form-card">
+                        <h3><i class="fas fa-user-plus"></i> Registrar Nuevo Usuario</h3>
+                        <form id="add-user-form" onsubmit="handleAddUser(event)">
+                            <div class="form-row">
+                                <div class="input-group">
+                                    <i class="fas fa-user"></i>
+                                    <input type="text" id="new-user-name" placeholder="Nombre completo" required>
+                                </div>
+                                <div class="input-group">
+                                    <i class="fas fa-envelope"></i>
+                                    <input type="email" id="new-user-email" placeholder="Correo electronico" required>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="input-group">
+                                    <i class="fas fa-phone"></i>
+                                    <input type="tel" id="new-user-phone" placeholder="Telefono" required>
+                                </div>
+                                <div class="input-group">
+                                    <i class="fas fa-lock"></i>
+                                    <input type="password" id="new-user-password" placeholder="Contrasena temporal" required>
+                                </div>
+                            </div>
+                            <button type="submit" class="submit-btn">
+                                <i class="fas fa-plus-circle"></i> Registrar Usuario
+                            </button>
+                        </form>
+                    </div>
+                    <div class="table-card">
+                        <h3>Usuarios Registrados</h3>
+                        <div class="table-responsive">
+                            <table id="users-table">
+                                <thead>
+                                    <tr>
+                                        <th>Nombre</th>
+                                        <th>Email</th>
+                                        <th>Telefono</th>
+                                        <th>Puntos</th>
+                                        <th>Registro</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="users-table-body">
+                                    <!-- Filled by JS -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Assign Routines Tab -->
+                <div id="instructor-assign" class="tab-content">
+                    <h2><i class="fas fa-clipboard-list"></i> Asignar Rutinas</h2>
+                    <div class="form-card">
+                        <h3><i class="fas fa-file-signature"></i> Nueva Asignacion</h3>
+                        <form id="assign-routine-form" onsubmit="handleAssignRoutine(event)">
+                            <div class="form-row">
+                                <div class="input-group">
+                                    <i class="fas fa-user"></i>
+                                    <select id="assign-user" required>
+                                        <option value="">Seleccionar usuario...</option>
+                                    </select>
+                                </div>
+                                <div class="input-group">
+                                    <i class="fas fa-clipboard-list"></i>
+                                    <select id="assign-routine-type" required>
+                                        <option value="">Tipo de rutina...</option>
+                                        <option value="push">Push Day - Pecho y Triceps</option>
+                                        <option value="pull">Pull Day - Espalda y Biceps</option>
+                                        <option value="legs">Leg Day - Piernas</option>
+                                        <option value="fullbody">Full Body</option>
+                                        <option value="cardio">Cardio y Resistencia</option>
+                                        <option value="arms">Brazos y Abdomen</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="input-group">
+                                    <i class="fas fa-calendar"></i>
+                                    <select id="assign-day" required>
+                                        <option value="">Dia de la semana...</option>
+                                        <option value="lunes">Lunes</option>
+                                        <option value="martes">Martes</option>
+                                        <option value="miercoles">Miercoles</option>
+                                        <option value="jueves">Jueves</option>
+                                        <option value="viernes">Viernes</option>
+                                        <option value="sabado">Sabado</option>
+                                    </select>
+                                </div>
+                                <div class="input-group">
+                                    <i class="fas fa-signal"></i>
+                                    <select id="assign-difficulty" required>
+                                        <option value="">Nivel...</option>
+                                        <option value="principiante">Principiante</option>
+                                        <option value="intermedio">Intermedio</option>
+                                        <option value="avanzado">Avanzado</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <button type="submit" class="submit-btn">
+                                <i class="fas fa-check-circle"></i> Asignar Rutina
+                            </button>
+                        </form>
+                    </div>
+                    <div class="table-card">
+                        <h3>Rutinas Asignadas</h3>
+                        <div class="table-responsive">
+                            <table id="assigned-table">
+                                <thead>
+                                    <tr>
+                                        <th>Usuario</th>
+                                        <th>Rutina</th>
+                                        <th>Dia</th>
+                                        <th>Nivel</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="assigned-table-body">
+                                    <!-- Filled by JS -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Attendance Tab -->
+                <div id="instructor-attendance" class="tab-content">
+                    <h2><i class="fas fa-chart-bar"></i> Control de Asistencia</h2>
+                    <div class="stats-grid two-cols">
+                        <div class="stat-card orange">
+                            <i class="fas fa-clock"></i>
+                            <div>
+                                <h3 id="avg-time-today">48 min</h3>
+                                <p>Tiempo promedio hoy</p>
+                            </div>
+                        </div>
+                        <div class="stat-card black">
+                            <i class="fas fa-door-open"></i>
+                            <div>
+                                <h3 id="people-now">3</h3>
+                                <p>Personas en el gym ahora</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="table-card">
+                        <h3>Registro de Asistencia - Hoy</h3>
+                        <div class="table-responsive">
+                            <table id="attendance-table">
+                                <thead>
+                                    <tr>
+                                        <th>Usuario</th>
+                                        <th>Entrada</th>
+                                        <th>Salida</th>
+                                        <th>Duracion</th>
+                                        <th>Estado</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="attendance-table-body">
+                                    <!-- Filled by JS -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Manage Rewards Tab -->
+                <div id="instructor-manage-rewards" class="tab-content">
+                    <h2><i class="fas fa-gift"></i> Gestionar Recompensas</h2>
+                    <div class="form-card">
+                        <h3><i class="fas fa-gift"></i> Otorgar Recompensa</h3>
+                        <form id="reward-form" onsubmit="handleGiveReward(event)">
+                            <div class="form-row">
+                                <div class="input-group">
+                                    <i class="fas fa-user"></i>
+                                    <select id="reward-user" required>
+                                        <option value="">Seleccionar usuario...</option>
+                                    </select>
+                                </div>
+                                <div class="input-group">
+                                    <i class="fas fa-gift"></i>
+                                    <select id="reward-type" required>
+                                        <option value="">Tipo de recompensa...</option>
+                                        <option value="puntos-50">50 Puntos Extra</option>
+                                        <option value="puntos-100">100 Puntos Extra</option>
+                                        <option value="clase-gratis">Clase Personalizada Gratis</option>
+                                        <option value="suplemento">Suplemento Gratis</option>
+                                        <option value="camiseta">Camiseta JustLife</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="input-group full-width">
+                                <i class="fas fa-comment"></i>
+                                <input type="text" id="reward-reason" placeholder="Motivo de la recompensa (ej: 10 visitas seguidas)">
+                            </div>
+                            <button type="submit" class="submit-btn">
+                                <i class="fas fa-gift"></i> Otorgar Recompensa
+                            </button>
+                        </form>
+                    </div>
+                    <div class="table-card">
+                        <h3>Historial de Recompensas</h3>
+                        <div class="table-responsive">
+                            <table id="rewards-history-table">
+                                <thead>
+                                    <tr>
+                                        <th>Usuario</th>
+                                        <th>Recompensa</th>
+                                        <th>Motivo</th>
+                                        <th>Fecha</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="rewards-history-body">
+                                    <!-- Filled by JS -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </section>
+
+    <!-- Toast notification -->
+    <div id="toast" class="toast hidden">
+        <i class="fas fa-check-circle"></i>
+        <span id="toast-message"></span>
+    </div>
+
+    <script src="demo.js"></script>
+</body>
+</html>
